@@ -1,16 +1,17 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Text;
-using Miventech.NativeUnityVoxReader;
-using Miventech.NativeUnityVoxReader.Data;
-using Miventech.NativeUnityVoxReader.Abstract;
-using Miventech.NativeUnityVoxReader.Tools;
-namespace Miventech.NativeUnityVoxReader
+using Miventech.NativeVoxReader;
+using Miventech.NativeVoxReader.Data;
+using Miventech.NativeVoxReader.Abstract;
+using Miventech.NativeVoxReader.Tools;
+namespace Miventech.NativeVoxReader
 {
     public class VoxReader : MonoBehaviour
     {
+        public bool UseRelativePath = true;
         public string FilePathVox;
 
         // Cache for editor/runtime use
@@ -22,7 +23,13 @@ namespace Miventech.NativeUnityVoxReader
         [ContextMenu("Read Vox File")]
         public void ReadVoxFile()
         {
-            if (string.IsNullOrEmpty(FilePathVox) || !File.Exists(FilePathVox))
+            var PathToRead = FilePathVox;
+            if (UseRelativePath)
+            {
+                PathToRead = Path.Combine(Application.dataPath, FilePathVox);
+            }
+            
+            if (string.IsNullOrEmpty(PathToRead) || !File.Exists(PathToRead))
             {
                 Debug.LogError("File path is invalid or file does not exist.");
                 return;
@@ -34,7 +41,7 @@ namespace Miventech.NativeUnityVoxReader
                 return;
             }
 
-            loadedVoxFile = ReaderVoxFile.Read(FilePathVox);
+            loadedVoxFile = ReaderVoxFile.Read(PathToRead);
 
             RemoveInternalObject();
             

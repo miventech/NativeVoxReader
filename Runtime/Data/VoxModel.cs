@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Miventech.NativeUnityVoxReader.Data
+namespace Miventech.NativeVoxReader.Data
 {
     // Represents an individual model within the VOX file (corresponds to SIZE and XYZI chunks)
     [System.Serializable]

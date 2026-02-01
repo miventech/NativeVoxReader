@@ -1,0 +1,18 @@
+{
+    "name": "Miventech.NativeVoxReader.Editor",
+    "rootNamespace": "Miventech.NativeVoxReader.Editor",
+    "references": [
+        "Miventech.NativeVoxReader"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

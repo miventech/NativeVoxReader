@@ -1,9 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
-using Miventech.NativeUnityVoxReader.Data;
-using Miventech.NativeUnityVoxReader.Abstract;
+using Miventech.NativeVoxReader.Data;
+using Miventech.NativeVoxReader.Abstract;
 
-namespace Miventech.NativeUnityVoxReader.CreatorObjects
+namespace Miventech.NativeVoxReader.CreatorObjects
 {
     /// <summary>
     /// Basic implementation of VoxMeshBuilderAbstract.

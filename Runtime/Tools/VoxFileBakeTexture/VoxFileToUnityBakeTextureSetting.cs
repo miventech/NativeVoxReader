@@ -1,5 +1,5 @@
 using UnityEngine;
-namespace Miventech.NativeUnityVoxReader.Tools.VoxFileBakeTexture
+namespace Miventech.NativeVoxReader.Tools.VoxFileBakeTexture
 {
     public class VoxFileToUnityBakeTextureSetting
     {

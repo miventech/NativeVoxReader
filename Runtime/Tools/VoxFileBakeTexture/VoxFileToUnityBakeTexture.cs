@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Miventech.NativeUnityVoxReader.Data;
-using Miventech.NativeUnityVoxReader.Tools.VoxFileBakeTexture.Data;
+using Miventech.NativeVoxReader.Data;
+using Miventech.NativeVoxReader.Tools.VoxFileBakeTexture.Data;
 using System;
 
-namespace Miventech.NativeUnityVoxReader.Tools.VoxFileBakeTexture
+namespace Miventech.NativeVoxReader.Tools.VoxFileBakeTexture
 {
     public static class VoxFileToUnityBakeTexture
     {
@@ -362,9 +362,6 @@ namespace Miventech.NativeUnityVoxReader.Tools.VoxFileBakeTexture
                 tris.Add(baseIndex + 2); // 2
             }
         }
-        
-       
-        
     }
 }
 

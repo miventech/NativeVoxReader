@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace Miventech.NativeUnityVoxReader.Data
+namespace Miventech.NativeVoxReader.Data
 {
     // Main container for all information read from the file
     [System.Serializable]

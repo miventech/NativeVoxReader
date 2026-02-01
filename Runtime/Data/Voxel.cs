@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Miventech.NativeUnityVoxReader.Data
+namespace Miventech.NativeVoxReader.Data
 {
     // Represents a single voxel in local coordinates
     [System.Serializable]

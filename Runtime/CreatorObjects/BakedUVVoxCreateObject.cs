@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
-using Miventech.NativeUnityVoxReader.Data;
-using Miventech.NativeUnityVoxReader.Abstract;
-using Miventech.NativeUnityVoxReader.Tools;
-using Miventech.NativeUnityVoxReader.Tools.VoxFileBakeTexture;
+using Miventech.NativeVoxReader.Data;
+using Miventech.NativeVoxReader.Abstract;
+using Miventech.NativeVoxReader.Tools;
+using Miventech.NativeVoxReader.Tools.VoxFileBakeTexture;
 
-namespace Miventech.NativeUnityVoxReader.CreatorObjects
+namespace Miventech.NativeVoxReader.CreatorObjects
 {
 
     /// <summary>

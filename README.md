@@ -1,4 +1,4 @@
-# Native Unity VOX Reader
+# Native Vox Reader
 
 [Español](README_ES.md)
 

@@ -2,10 +2,10 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
-using Miventech.NativeUnityVoxReader.Data;
-using Miventech.NativeUnityVoxReader.Tools.ReaderFile.Data;
+using Miventech.NativeVoxReader.Data;
+using Miventech.NativeVoxReader.Tools.ReaderFile.Data;
 
-namespace Miventech.NativeUnityVoxReader.Tools
+namespace Miventech.NativeVoxReader.Tools
 {
     public static class ReaderVoxFile
     {

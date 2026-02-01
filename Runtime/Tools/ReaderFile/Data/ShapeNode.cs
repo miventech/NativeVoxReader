@@ -1,4 +1,4 @@
-namespace Miventech.NativeUnityVoxReader.Tools.ReaderFile.Data
+namespace Miventech.NativeVoxReader.Tools.ReaderFile.Data
 {
     internal class ShapeNode : VoxNode
     {

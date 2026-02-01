@@ -1,5 +1,5 @@
 using UnityEngine;
-namespace Miventech.NativeUnityVoxReader.Tools.VoxFileBakeTexture.Data
+namespace Miventech.NativeVoxReader.Tools.VoxFileBakeTexture.Data
 {
     public class QuadInfo
     {

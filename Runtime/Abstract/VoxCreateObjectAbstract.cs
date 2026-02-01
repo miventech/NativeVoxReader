@@ -1,12 +1,12 @@
 using UnityEngine;
-using Miventech.NativeUnityVoxReader;
-using Miventech.NativeUnityVoxReader.Data;
+using Miventech.NativeVoxReader;
+using Miventech.NativeVoxReader.Data;
 
 /// <summary>
 /// Abstract base class for building Unity Meshes from VoxFile data.
 /// Implementations should convert voxel data into Unity Mesh objects.
 /// </summary>
-namespace Miventech.NativeUnityVoxReader.Abstract
+namespace Miventech.NativeVoxReader.Abstract
 {
     public abstract class VoxCreateObjectAbstract: MonoBehaviour
     {

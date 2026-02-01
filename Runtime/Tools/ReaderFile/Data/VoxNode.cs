@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Miventech.NativeUnityVoxReader.Tools.ReaderFile.Data
+namespace Miventech.NativeVoxReader.Tools.ReaderFile.Data
 {
     internal class VoxNode
     {
