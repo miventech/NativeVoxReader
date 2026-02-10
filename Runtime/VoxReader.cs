@@ -7,6 +7,8 @@ using Miventech.NativeVoxReader;
 using Miventech.NativeVoxReader.Data;
 using Miventech.NativeVoxReader.Abstract;
 using Miventech.NativeVoxReader.Tools;
+using System;
+using Miventech.NativeVoxReader.Runtime.Tools.ReaderFile;
 namespace Miventech.NativeVoxReader
 {
     public class VoxReader : MonoBehaviour
@@ -41,7 +43,19 @@ namespace Miventech.NativeVoxReader
                 return;
             }
 
-            loadedVoxFile = ReaderVoxFile.Read(PathToRead);
+            string extension = Path.GetExtension(PathToRead).ToLower();
+            loadedVoxFile = null;
+            foreach (var ReaderClass in BaseReaderFile.GetAllReaders())
+            {
+                if (!ReaderClass.IsValidFile(PathToRead)) continue;
+                loadedVoxFile = ReaderClass.Read(PathToRead);
+            }
+            if(loadedVoxFile == null)
+            {
+                Debug.LogError($"Unsupported file extension: {extension}");
+                Debug.LogError($"No suitable reader found for file: {PathToRead}");
+                return;
+            }
 
             RemoveInternalObject();
             

@@ -5,11 +5,18 @@ using UnityEngine;
 using Miventech.NativeVoxReader.Data;
 using Miventech.NativeVoxReader.Tools.ReaderFile.Data;
 
-namespace Miventech.NativeVoxReader.Tools
+namespace Miventech.NativeVoxReader.Runtime.Tools.ReaderFile
 {
-    public static class ReaderVoxFile
+    public class ReaderVoxFile: BaseReaderFile
     {
-        public static VoxFile Read(string path)
+        public override bool IsValidFile(string path)
+        {
+            string extension = Path.GetExtension(path).ToLower();
+            if (extension != ".vox") return false;
+            return true;
+        }
+
+        public override VoxFile Read(string path)
         {
             var loadedVoxFile = ParseVoxFile(path);
             if (loadedVoxFile != null)

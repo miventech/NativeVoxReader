@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEditor.AssetImporters;
 using System.IO;
+using Miventech.NativeVoxReader.Tools.ReaderFile;
 using Miventech.NativeVoxReader.Tools;
 using Miventech.NativeVoxReader;
 using Miventech.NativeVoxReader.Data;
 using Miventech.NativeVoxReader.Tools.VoxFileBakeTexture;
+using Miventech.NativeVoxReader.Runtime.Tools.ReaderFile;
 
 
 namespace Miventech.NativeVoxReader.Editor
@@ -22,7 +24,7 @@ namespace Miventech.NativeVoxReader.Editor
         public override void OnImportAsset(AssetImportContext ctx)
         {
             // 1. Read the .vox file data
-            VoxFile loadedVoxFile = ReaderVoxFile.Read(ctx.assetPath);
+            VoxFile loadedVoxFile =new ReaderVoxFile().Read(ctx.assetPath);
             if (loadedVoxFile == null)
             {
                 Debug.LogError($"VoxImporter: Failed to read vox file at {ctx.assetPath}");
