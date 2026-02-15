@@ -1,7 +1,10 @@
 using UnityEngine;
+using Miventech.NativeVoxReader.VoxRenderer.Types;
+
 namespace Miventech.NativeVoxReader.Tools.VoxFileBakeTexture
 {
-    public class VoxFileToUnityBakeTextureSetting
+    [System.Serializable]
+    public class VoxFileToUnityBakeTextureSetting : VoxRenderSettings
     {
         public int maxAtlasSize = 4096;
         public int maxQuadSize = 48;

@@ -20,7 +20,6 @@ namespace Miventech.NativeVoxReader.Abstract
        
         
         
-        
     }
 }
 

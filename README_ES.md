@@ -31,7 +31,9 @@ Mantén MagicaVoxel abierto, guarda tus cambios y observa cómo Unity actualiza 
 *   **🌳 Jerarquía de Escena**: Soporta totalmente las jerarquías de MagicaVoxel (Grupos y Transformaciones).
 *   **📐 Alta Optimización**: El algoritmo avanzado de **Greedy Meshing** reduce el conteo de polígonos hasta en un 90% en comparación con métodos basados en cubos.
 *   **🎨 Horneado de Texturas**: Hornea todos los colores de los vóxeles en un solo atlas para mantener tus "draw calls" al mínimo.
-*   **🛠 Controles en el Inspector**: Ajusta la escala, el tamaño del atlas y la densidad de malla directamente en el importador del asset.
+*   **� Renderizado Dinámico**: Nuevo sistema extensible que permite diferentes modos de renderizado (Atlas Horneado vs. Estilo Paleta).
+*   **🚀 Auto-Descubrimiento**: Añade nuevos algoritmos de renderizado simplemente heredando de `VoxRenderAbstract` y aparecerán en el Inspector automáticamente.
+*   **🛠 Controles en el Inspector**: Interfaz de usuario totalmente dinámica que se adapta al modo de renderizado seleccionado.
 *   **🧩 Minimalist y Limpio**: Cero dependencias externas e incluye Assembly Definitions para tiempos de compilación óptimos.
 *   **🔄 Soporte para Vengi**: Ahora incluye soporte para leer e importar datos desde Vengi.
 

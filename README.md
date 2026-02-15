@@ -31,7 +31,9 @@ Keep MagicaVoxel open, save your changes, and watch Unity update your models ins
 *   **🌳 Scene Awareness**: Fully supports MagicaVoxel hierarchies (Groups and Transformations).
 *   **📐 High Optimization**: Advanced **Greedy Meshing** reduces poly count by up to 90% compared to cube-based methods.
 *   **🎨 Texture Baking**: Bakes all voxel colors into a single atlas to keep your draw calls at a minimum.
-*   **🛠 Inspector Controls**: Adjust scale, atlas size, and mesh density directly on the asset importer.
+*   **� Dynamic Rendering**: New extensible system allowing different rendering modes (Baked Atlas vs. Palette Style).
+*   **🚀 Auto-Discoverable**: Add new rendering algorithms just by inheriting from `VoxRenderAbstract`, and they'll appear in the Inspector automatically.
+*   **🛠 Inspector Controls**: Fully dynamic UI that adapts to the selected rendering mode.
 *   **🧩 Minimalist & Clean**: Zero external dependencies and includes Assembly Definitions for optimal compile times.
 *   **🔄 Vengi Support**: Now includes support for reading and importing data from Vengi.
 

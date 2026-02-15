@@ -3,11 +3,10 @@ using UnityEditor.AssetImporters;
 using System.IO;
 using Miventech.NativeVoxReader.Tools.ReaderFile;
 using Miventech.NativeVoxReader.Tools;
-using Miventech.NativeVoxReader;
 using Miventech.NativeVoxReader.Data;
-using Miventech.NativeVoxReader.Tools.VoxFileBakeTexture;
+using Miventech.NativeVoxReader.VoxRenderer.Types;
+using Miventech.NativeVoxReader.VoxRenderer.Types.VoxFileBakeTexture;
 using Miventech.NativeVoxReader.Runtime.Tools.ReaderFile;
-
 
 namespace Miventech.NativeVoxReader.Editor
 {
@@ -18,41 +17,63 @@ namespace Miventech.NativeVoxReader.Editor
     [ScriptedImporter(1, "vox")]
     public class NativeVoxImporter : ScriptedImporter
     {
-        public int maxAtlasSize = 4096;
-        public int maxQuadSize = 64;
-        public float scale = 0.1f;
+        [HideInInspector]
+        public string selectedRenderType = "VoxBakedTextureRenderer";
+
+        [SerializeReference]
+        public VoxRenderSettings settings;
+
         public override void OnImportAsset(AssetImportContext ctx)
         {
             // 1. Read the .vox file data
-            VoxFile loadedVoxFile =new ReaderVoxFile().Read(ctx.assetPath);
+            VoxFile loadedVoxFile = new ReaderVoxFile().Read(ctx.assetPath);
             if (loadedVoxFile == null)
             {
                 Debug.LogError($"VoxImporter: Failed to read vox file at {ctx.assetPath}");
                 return;
             }
 
-            // 2. Create the root GameObject for the asset
-            GameObject root = new GameObject(Path.GetFileNameWithoutExtension(ctx.assetPath));
-
-            // 3. Convert VOX data to Unity Meshes and Materials using the existing baking logic
-            VoxFileToUnityBakeTextureSetting settings = new VoxFileToUnityBakeTextureSetting()
+            // 2. Resolve the renderer type
+            System.Type rendererType = VoxRenderAbstract.GetTypeByName(selectedRenderType);
+            if (rendererType == null)
             {
-                maxAtlasSize = maxAtlasSize,
-                maxQuadSize = maxQuadSize,
-                Scale = scale
-            };
+                // Fallback to Baked Texture if not found
+                rendererType = typeof(VoxBakedTextureRenderer);
+            }
 
-            VoxModelResult[] results = VoxFileToUnityBakeTexture.Convert(loadedVoxFile, loadedVoxFile.palette.ToColor32Array(), settings);
+            // 3. Create a temporary renderer instance
+            GameObject tempGo = new GameObject("TempVoxRenderer");
+            tempGo.hideFlags = HideFlags.HideAndDontSave;
+            VoxRenderAbstract renderer = (VoxRenderAbstract)tempGo.AddComponent(rendererType);
 
-            if (results == null || results.Length == 0)
+            // 4. Configure and Render
+            Color32[] palette = loadedVoxFile.palette.ToColor32Array();
+            
+            // Ensure settings are valid and match the renderer
+            if (settings == null || settings.GetType() != renderer.SettingsType)
+            {
+                settings = (VoxRenderSettings)System.Activator.CreateInstance(renderer.SettingsType);
+            }
+            
+            renderer.SetSettings(settings);
+            VoxModelResult[] results = renderer.Render(loadedVoxFile, palette);
+
+            if (results == null)
             {
                 Debug.LogWarning($"VoxImporter: No models found in {ctx.assetPath}");
-                ctx.AddObjectToAsset("root", root);
-                ctx.SetMainObject(root);
+                Object.DestroyImmediate(tempGo);
                 return;
             }
 
-            // 4. Iterate through models and create child objects
+            // 5. Create the root GameObject
+            GameObject root = new GameObject(Path.GetFileNameWithoutExtension(ctx.assetPath));
+
+            // Extract scale from settings if it exists (using reflection for convenience in base class)
+            float currentScale = 0.1f;
+            var scaleField = settings.GetType().GetField("Scale") ?? settings.GetType().GetField("scale");
+            if (scaleField != null) currentScale = (float)scaleField.GetValue(settings);
+
+            // 6. Process results
             for (int i = 0; i < results.Length; i++)
             {
                 var result = results[i];
@@ -60,30 +81,35 @@ namespace Miventech.NativeVoxReader.Editor
 
                 GameObject modelGo = new GameObject(results.Length > 1 ? $"Model_{i}" : root.name);
                 modelGo.transform.SetParent(root.transform);
-                modelGo.transform.localPosition = (Vector3)loadedVoxFile.models[i].position * settings.Scale;
+                modelGo.transform.localPosition = (Vector3)loadedVoxFile.models[i].position * currentScale;
                 var meshFilter = modelGo.AddComponent<MeshFilter>();
                 var meshRenderer = modelGo.AddComponent<MeshRenderer>();
 
                 meshFilter.sharedMesh = result.mesh;
                 meshRenderer.sharedMaterial = result.material;
 
-                // Set meaningful names for sub-assets
                 string baseName = results.Length > 1 ? $"{root.name}_{i}" : root.name;
                 result.mesh.name = $"{baseName}_mesh";
                 result.material.name = $"{baseName}_mat";
                 result.texture.name = $"{baseName}_tex";
 
-                // Register sub-assets so they are saved within the .vox asset file
                 ctx.AddObjectToAsset(result.mesh.name, result.mesh);
                 ctx.AddObjectToAsset(result.texture.name, result.texture);
                 ctx.AddObjectToAsset(result.material.name, result.material);
             }
 
-            // 5. Register the root GameObject as the main asset object
             ctx.AddObjectToAsset("root", root);
             ctx.SetMainObject(root);
 
-            Debug.Log($"VoxImporter: Successfully imported {ctx.assetPath} with {results.Length} models.");
+            // Cleanup
+            Object.DestroyImmediate(tempGo);
+
+            Debug.Log($"VoxImporter [{selectedRenderType}]: Successfully imported {ctx.assetPath} with {results.Length} models.");
+        }
+
+        private void ApplyImporterSettings(VoxRenderAbstract renderer)
+        {
+            // No longer needed as we pass settings directly
         }
     }
 }
