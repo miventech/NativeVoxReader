@@ -8,6 +8,15 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: ab5829fc25efa6b48a46fc7ef9225ba8, type: 3}
-  maxAtlasSize: 4096
-  maxQuadSize: 64
-  scale: 0.1
+  selectedRenderType: VoxBakedTextureRenderer
+  settings:
+    rid: 9010087019215585283
+  references:
+    version: 2
+    RefIds:
+    - rid: 9010087019215585283
+      type: {class: VoxFileToUnityBakeTextureSetting, ns: Miventech.NativeVoxReader.Tools.VoxFileBakeTexture, asm: Miventech.NativeVoxReader}
+      data:
+        maxAtlasSize: 4096
+        maxQuadSize: 48
+        Scale: 0.1

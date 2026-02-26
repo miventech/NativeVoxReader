@@ -1,13 +1,15 @@
-# Native Unity VOX Reader
+# Native Vox Reader For UNITY
 
 [English](README.md)
 
 **La forma más natural y potente de llevar tu arte de MagicaVoxel a Unity.**
 
+**Aviso:** Esta es una herramienta de terceros creada por la comunidad y NO está afiliada ni respaldada por Unity Technologies. Úsala bajo tu propia responsabilidad.
+
 [![Versión de Unity](https://img.shields.io/badge/unity-2020.3%2B-blue.svg)](https://unity3d.com/get-unity/download/archive)
 [![Licencia](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE.md)
 
-Native Unity VOX Reader es una librería de alto rendimiento e importador de assets que permite tratar los archivos `.vox` de MagicaVoxel como assets nativos de Unity. Sin configuraciones complejas—simplemente arrastra, suelta y disfruta.
+Native Vox Reader For UNITY es una librería de terceros, de alto rendimiento y un importador de assets que permite tratar los archivos `.vox` de MagicaVoxel como assets compatibles con Unity. Sin configuraciones complejas—simplemente arrastra, suelta y disfruta.
 
 ---
 
