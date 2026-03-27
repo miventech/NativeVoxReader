@@ -20,6 +20,9 @@ namespace Miventech.NativeVoxReader.Editor
         [HideInInspector]
         public string selectedRenderType = "VoxBakedTextureRenderer";
 
+        public bool overridePalette = false;
+        public Color32[] customPalette;
+
         [SerializeReference]
         public VoxRenderSettings settings;
 
@@ -48,6 +51,16 @@ namespace Miventech.NativeVoxReader.Editor
 
             // 4. Configure and Render
             Color32[] palette = loadedVoxFile.palette.ToColor32Array();
+            if (overridePalette && customPalette != null && customPalette.Length == palette.Length)
+            {
+                palette = customPalette;
+            }
+            else if (overridePalette)
+            {
+                // Init customPalette if sizes don't match
+                customPalette = (Color32[])palette.Clone();
+                palette = customPalette;
+            }
             
             // Ensure settings are valid and match the renderer
             if (settings == null || settings.GetType() != renderer.SettingsType)
